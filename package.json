@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "A Quasar Project",
   "productName": "App Exemple Quasar",
-  "author": "raimundo-ferreira <byraimundoferreira@gmail.com>",
+  "author": "raimundo-ferreira <dev.raimundoferreira@gmail.com>",
   "private": true,
   "scripts": {
     "lint": "eslint --ext .js,.vue ./",
@@ -13,17 +13,16 @@
     "build": "quasar build"
   },
   "dependencies": {
-    "@quasar/extras": "^1.16.4",
+    "@quasar/extras": "^1.16.11",
     "axios": "^1.2.1",
-    "pinia": "^2.0.11",
-    "quasar": "^2.8.0",
+    "quasar": "^2.15.4",
     "set-value": "^3.0.1",
-    "update": "^0.7.4",
+    "update": "^0.4.2",
     "vue": "^3.4.18",
     "vue-router": "^4.0.12"
   },
   "devDependencies": {
-    "@quasar/app-vite": "^1.4.3",
+    "@quasar/app-vite": "^1.8.5",
     "autoprefixer": "^10.4.2",
     "eslint": "^8.11.0",
     "eslint-config-prettier": "^8.1.0",

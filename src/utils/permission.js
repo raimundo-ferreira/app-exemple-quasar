@@ -1,9 +1,9 @@
 import useAuthUser from "src/composables/UseAuthUser";
 
-const temPermissao = (sementePerfilAdmin) => {
+const temPermissao = (somentePerfilAdmin) => {
   const { user } = useAuthUser();
-  if (sementePerfilAdmin) {
-    return user.value.email == "adm@gmail.com";
+  if (somentePerfilAdmin) {
+    return user.value.login == "userOne@teste.com";
   } else {
     return false;
   }

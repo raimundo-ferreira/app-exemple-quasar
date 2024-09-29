@@ -1,5 +1,6 @@
 <template>
-  <q-page padding>
+  <q-page padding
+    class="constrain-more">
     <div class="row flex flex-center">
       <h3>Crie seu dashboard</h3>
     </div>
@@ -11,9 +12,6 @@ import { ref, onMounted } from "vue";
 import useNotify from "src/composables/UseNotify";
 
 const { notifyError } = useNotify();
-
-const produtos = ref([]);
-const usuarios = ref([]);
 
 const handleGetCadastros = async () => {
   try {

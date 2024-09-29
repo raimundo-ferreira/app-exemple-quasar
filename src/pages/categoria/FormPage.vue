@@ -3,39 +3,20 @@
     <div class="row justify-center">
       <div class="col-12 text-center">
         <p v-if="form.id"
-          class="text-h6">Usuario ({{ form.id }})</p>
+          class="text-h6">Categoria ({{ form.id }})</p>
         <p v-else
-          class="text-h6">Usuario</p>
+          class="text-h6">Categoria</p>
       </div>
       <q-form class="q-pa-md shadow-1"
         @submit.prevent="handleSubmit()">
-        <div class="row q-col-gutter-sm"
-          readonly>
+        <div class="row q-col-gutter-sm">
           <q-input v-model="form.name"
             class="col-md-12 col-xs-12 col-sm-12"
-            label="Nome"
+            label="Descrição"
             :readonly="isView"
             :rules="validaIsEmpty" />
-
-          <q-input v-model="form.login"
-            class="col-md-5 col-xs-12 col-sm-12"
-            label="Email"
-            :readonly="isView"
-            :rules="validaIsEmpty" />
-
-          <q-input v-model="form.password"
-            class="col-md-4 col-xs-12 col-sm-12"
-            label="Senha"
-            type="password"
-            :readonly="isView"
-            :rules="validaIsEmpty" />
-
-          <q-checkbox v-model="form.active"
-            class="col-md-2 col-xs-12 col-sm-12"
-            label="Ativo"
-            :disable="isView" />
-
         </div>
+
         <q-btn v-if="!isView"
           :label="isUpdate ? 'Atualiza' : 'Salva'"
           color="primary"
@@ -48,7 +29,7 @@
           class="q-mt-md full-width"
           rounded
           outline
-          :to="{ name: 'usuario' }" />
+          :to="{ name: 'categoria' }" />
       </q-form>
     </div>
   </q-page>
@@ -56,28 +37,25 @@
 
 <script setup>
 import { computed, onMounted, ref } from 'vue';
-import usuarioService from 'src/services/usuario';
+import categoriaService from 'src/services/categoria';
 import useNotify from 'src/composables/UseNotify';
 import { useRouter, useRoute } from 'vue-router';
 
 const route = useRoute();
 const router = useRouter();
 const { notifyError, notifySucess } = useNotify();
-const { post, getById, update } = usuarioService();
+const { post, getById, update } = categoriaService();
 
 const isUpdate = computed(() => route.params.id);
-const isView = ref(route.name == 'view-usuario');
+const isView = ref(route.name == 'view-categoria');
 
 const form = ref({
   id: 0,
-  name: '',
-  login: '',
-  password: '',
-  active: false,
+  name: ''
 });
 
 const validaIsEmpty = [
-  val => (val && val.length > 0) || 'O campo é obrigatório'
+  val => (val && (val.length > 0 || val != null)) || 'O campo é obrigatório'
 ];
 
 const handleSubmit = async () => {
@@ -90,9 +68,9 @@ const handleSubmit = async () => {
     notifySucess(
       (isUpdate.value ? 'Atualizado' : 'Salvo') + ' com sucesso!'
     );
-    router.push({ name: 'usuario' });
+    router.push({ name: 'categoria' });
   } catch (error) {
-    notifyError(error.response.data.message);
+    notifyError(error?.message);
   }
 };
 
@@ -100,14 +78,15 @@ const handleGetById = async (id) => {
   try {
     form.value = await getById(id);
   } catch (error) {
-    notifyError(error.response.data.message);
+    notifyError(error?.message);
   }
 };
 
 const sugereValores = () => {
   const ehInsert = (!isUpdate.value && !isView.value);
   if (ehInsert) {
-    form.value.active = true;
+    // form.value.type = 5; //outros
+    // form.value.active = true;
   }
 }
 

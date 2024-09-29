@@ -1,7 +1,7 @@
 import useApi from "src/composables/UseApi";
 
-export default function usuarioService() {
-  const { listAll, getById, post, update, remove } = useApi("user");
+export default function produtoService() {
+  const { listAll, getById, post, update, remove } = useApi("category");
   return {
     listAll,
     getById,

@@ -1,14 +1,14 @@
 <template>
   <q-page padding>
-    <q-table title="Usuários"
+    <q-table title="Categorias"
       title-class="text-h5 text-grey-8 text-bold"
       table-header-class="bg-grey-2 text-grey-8"
-      :rows="usuarios"
-      :columns="colunasUsuario"
+      :rows="categorias"
+      :columns="colunasCategoria"
       row-key="id"
       :loading="loading"
-      no-data-label="Sem dados para exibir"
       :filter="filter"
+      no-data-label="Sem dados para exibir"
       :visible-columns="columnsVisibleMobile()">
       <template #top-right>
         <q-input v-model="filter"
@@ -27,11 +27,11 @@
           color="primary"
           icon="mdi-plus"
           dense
-          :to="{ name: 'form-usuario' }" />
+          :to="{ name: 'form-categoria' }" />
         <q-btn color="primary"
           icon="archive"
           dense
-          @click="exportToCsv('Usuários', colunasUsuario, usuarios)">
+          @click="exportToCsv('Categorias', colunasCategoria, categorias)">
           <q-tooltip>Exportar para csv</q-tooltip>
         </q-btn>
       </template>
@@ -81,13 +81,14 @@
         </q-td>
       </template>
     </q-table>
-    <q-page-sticky v-if="temPermissao(true) && $q.platform.is.mobile"
+    <q-page-sticky class="small-screen-only"
+      v-if="temPermissao(true) && $q.platform.is.mobile"
       position="bottom-right"
       :offset="[18, 18]">
       <q-btn fab
         icon="mdi-plus"
         color="primary"
-        :to="{ name: 'form-usuario' }" />
+        :to="{ name: 'form-categoria' }" />
     </q-page-sticky>
   </q-page>
 </template>
@@ -97,31 +98,31 @@ import { onMounted, ref } from 'vue';
 import useNotify from 'src/composables/UseNotify';
 import { useRouter } from 'vue-router';
 import { useQuasar } from 'quasar';
-import { colunasUsuario } from './table';
-import usuarioService from 'src/services/usuario';
+import { colunasCategoria } from './table';
+import categoriaService from 'src/services/categoria';
 import { temPermissao } from 'src/utils/permission';
 import useGridExport from 'src/composables/UseGridExport';
 
-const usuarios = ref([]);
+const categorias = ref([]);
 const loading = ref(true);
 const router = useRouter();
 const $q = useQuasar();
 
 const filter = ref('');
-const { listAll, remove } = usuarioService();
+const { listAll, remove } = categoriaService();
 const { notifyError, notifySucess } = useNotify();
 const { exportToCsv } = useGridExport();
 
 const columnsVisibleMobile = () => {
   if ($q.platform.is.mobile) {
-    return ['name', 'actions'];
+    return ['description', 'price', 'actions'];
   }
 };
 
 const handleListAll = async () => {
   loading.value = true;
   try {
-    usuarios.value = await listAll();
+    categorias.value = await listAll();
   } catch (error) {
     notifyError(error?.response?.data?.message);
   } finally {
@@ -129,23 +130,23 @@ const handleListAll = async () => {
   }
 };
 
-const handleEdit = async (usuario) => {
-  router.push({ name: 'form-usuario', params: { id: usuario.id } });
+const handleEdit = async (categoria) => {
+  router.push({ name: 'form-categoria', params: { id: categoria.id } });
 };
 
-const handleView = async (usuario) => {
-  router.push({ name: 'view-usuario', params: { id: usuario.id } });
+const handleView = async (categoria) => {
+  router.push({ name: 'view-categoria', params: { id: categoria.id } });
 };
 
-const handleRemove = async (usuario) => {
+const handleRemove = async (categoria) => {
   try {
     $q.dialog({
       title: 'Confirme',
-      message: `Deseja excluir a usuario ${usuario.login} ?`,
+      message: `Deseja excluir a categoria ${categoria.name} ?`,
       cancel: true,
       persistent: true,
     }).onOk(async () => {
-      await remove(usuario.id);
+      await remove(categoria.id);
       notifySucess('Removido com sucesso!');
       handleListAll();
     });

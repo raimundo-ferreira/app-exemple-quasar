@@ -1,109 +1,87 @@
 <template>
-  <q-page
-    padding
-    class="row flex flex-center"
-  >
+  <q-page padding
+    class="row flex flex-center">
     <q-card class="col-md-3 col-sm-6 col-xs-12 shadow-4">
-      <q-form
-        class="q-pa-md"
-        @submit.prevent="handleRegister()"
-      >
+      <q-form class="q-pa-md"
+        @submit.prevent="handleRegister()">
         <p class="text-h4 text-center text-grey-8">Criar Conta</p>
-        <q-input
-          v-model="form.accesskey"
+        <q-input v-model="form.accesskey"
           label="Access Key"
           clearable
           lazy-rules
           type="text"
-          :rules="[(val) => (val && val.length > 0) || 'Informe o access key']"
-        >
+          :rules="[(val) => (val && val.length > 0) || 'Informe o access key']">
           <template #prepend>
             <q-icon name="key" />
           </template>
         </q-input>
-        <q-input
-          v-model="form.name"
+        <q-input v-model="form.name"
           label="Nome"
           clearable
           lazy-rules
           type="text"
-          :rules="[(val) => (val && val.length > 0) || 'Informe o nome']"
-        >
+          :rules="[(val) => (val && val.length > 0) || 'Informe o nome']">
 
           <template #prepend>
             <q-icon name="mdi-account-box" />
           </template>
         </q-input>
-        <q-input
-          v-model="form.username"
+        <q-input v-model="form.username"
           label="Email"
           clearable
           lazy-rules
           type="email"
-          :rules="[(val) => (val && val.length > 0) || 'Informe um email']"
-        >
+          :rules="[(val) => (val && val.length > 0) || 'Informe um email']">
 
           <template #prepend>
             <q-icon name="email" />
           </template>
         </q-input>
-        <q-input
-          v-model="form.password"
+        <q-input v-model="form.password"
           label="Senha"
           :type="isPassword ? 'password' : 'text'"
           clearable
           lazy-rules
-          :rules="validatePassword"
-        >
+          :rules="validatePassword">
 
           <template #prepend>
             <q-icon name="lock" />
           </template>
 
           <template #append>
-            <q-icon
-              :name="isPassword ? 'mdi-eye-off' : 'mdi-eye'"
+            <q-icon :name="isPassword ? 'mdi-eye-off' : 'mdi-eye'"
               class="cursor-pointer"
-              @click="isPassword = !isPassword"
-            />
+              @click="isPassword = !isPassword" />
           </template>
         </q-input>
-        <q-input
-          v-model="form.repassword"
+        <q-input v-model="form.repassword"
           label="Senha"
           :type="isPassword ? 'password' : 'text'"
           clearable
           lazy-rules
-          :rules="validateRepassword"
-        >
+          :rules="validateRepassword">
 
           <template #prepend>
             <q-icon name="lock" />
           </template>
 
           <template #append>
-            <q-icon
-              :name="isPassword ? 'mdi-eye-off' : 'mdi-eye'"
+            <q-icon :name="isPassword ? 'mdi-eye-off' : 'mdi-eye'"
               class="cursor-pointer"
-              @click="isPassword = !isPassword"
-            />
+              @click="isPassword = !isPassword" />
           </template>
         </q-input>
-        <q-btn
-          label="Registrar"
+        <q-btn label="Registrar"
           color="primary"
           class="full-width"
           rounded
-          type="submit"
-        />
-        <q-btn
-          label="Login"
+          type="submit" />
+        <q-btn label="Login"
           color="primary"
           class="full-width q-mt-md"
-          flat
+          outline
           rounded
-          to="/login"
-        />
+          to="/login" />
       </q-form>
     </q-card>
   </q-page>

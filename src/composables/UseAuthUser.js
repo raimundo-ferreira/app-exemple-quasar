@@ -6,16 +6,16 @@ import { useRouter } from "vue-router";
 export default function useAuthUser() {
   const $q = useQuasar();
   const router = useRouter();
-  const token = ref($q.localStorage.getItem("token"));
   const user = ref($q.localStorage.getItem("user"));
+  const token = ref($q.localStorage.getItem("token"));
 
   const login = async (form) => {
-    const { data } = await api.post("api/token", form);
+    const { data } = await api.post("login/authenticate", form);
     token.value = data.token;
     $q.localStorage.set("token", data.token);
     user.value = data.user;
     $q.localStorage.set("user", data.user);
-    return user;
+    return token;
   };
 
   const register = async (form) => {
@@ -29,7 +29,7 @@ export default function useAuthUser() {
         AccessKey: form.accesskey,
       },
     };
-    await api.post("api/register", register, config);
+    await api.post("register", register, config);
   };
 
   const checkToken = async () => {
@@ -37,7 +37,7 @@ export default function useAuthUser() {
       const headers = {
         Authorization: "Bearer " + $q.localStorage.getItem("token"),
       };
-      const { data } = await api.get("api/state", { headers });
+      const { data } = await api.get("login/authenticated", { headers });
       return data;
     } catch (error) {
       logout();

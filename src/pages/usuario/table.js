@@ -15,9 +15,9 @@ const colunasUsuario = [
     sortable: true,
   },
   {
-    name: "email",
-    field: "email",
-    label: "Emai",
+    name: "login",
+    field: "login",
+    label: "Login",
     align: "left",
     sortable: true,
   },

@@ -1,11 +1,9 @@
 <template>
-  <q-toggle
-    v-model="darkMode"
+  <q-toggle v-model="darkMode"
     checked-icon="mdi-weather-night"
     color="green"
     unchecked-icon="mdi-white-balance-sunny"
-    size="lg"
-  />
+    size="lg" />
 </template>
 
 <script setup>

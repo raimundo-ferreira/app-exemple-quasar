@@ -2,7 +2,7 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
       <q-toolbar>
-        <q-toolbar-title>Exemplo de aplicativo Vue e Quasar Framework</q-toolbar-title>
+        <q-toolbar-title>{{ productName }}</q-toolbar-title>
         <div>Versão {{ version }}</div>
       </q-toolbar>
     </q-header>
@@ -14,5 +14,5 @@
 </template>
 
 <script setup>
-import { version } from "../../package.json";
+import { version, productName } from "../../package.json";
 </script>

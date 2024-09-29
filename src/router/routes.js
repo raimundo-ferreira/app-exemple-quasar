@@ -45,19 +45,19 @@ const routes = [
         component: () => import("pages/usuario/FormPage.vue"),
       },
       {
-        path: "produto",
-        name: "produto",
-        component: () => import("pages/produto/ListPage.vue"),
+        path: "categoria",
+        name: "categoria",
+        component: () => import("pages/categoria/ListPage.vue"),
       },
       {
-        path: "view-produto/:id",
-        name: "view-produto",
-        component: () => import("pages/produto/FormPage.vue"),
+        path: "view-categoria/:id",
+        name: "view-categoria",
+        component: () => import("pages/categoria/FormPage.vue"),
       },
       {
-        path: "form-produto/:id?",
-        name: "form-produto",
-        component: () => import("pages/produto/FormPage.vue"),
+        path: "form-categoria/:id?",
+        name: "form-categoria",
+        component: () => import("pages/categoria/FormPage.vue"),
       },
       {
         path: "configuracao",

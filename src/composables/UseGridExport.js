@@ -18,6 +18,10 @@ export default function useGridExport() {
   };
 
   const exportToCsv = (fileName, columns, data) => {
+    const ixColunaActions = columns.findIndex(c => c.name == "actions");
+    if (ixColunaActions >= 0) {
+      columns.splice(ixColunaActions, 1); // removi a colua actions
+    }
     const content = [columns.map((col) => wrapCsvValue(col.label))]
       .concat(
         data.map((row) =>

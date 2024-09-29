@@ -64,7 +64,7 @@ module.exports = configure(function (ctx) {
       // analyze: true,
       env: {
         API_URL_BASE: ctx.dev
-          ? "http://localhost:5000/"
+          ? "http://localhost:5239/"
           : "https://node171237-gc-web.nordeste-idc.saveincloud.net/",
       },
       // rawDefine: {}
